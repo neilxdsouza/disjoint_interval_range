@@ -41,56 +41,56 @@ struct disjoint_interval_range {
 map<int, IntervalMergeStrategy> disjoint_interval_range::intersects(int start, int end)
 {
 	string fn (__PRETTY_FUNCTION__);
-	cout << "ENTER " << fn << " start: " << start << ", end: " << end << endl;
+	//cout << "ENTER " << fn << " start: " << start << ", end: " << end << endl;
 	map<int, IntervalMergeStrategy> res;
 	map<int, int>::iterator it_lb_st = range_start_index_map.lower_bound(start);
 	if (it_lb_st == range_start_index_map.begin()) {
 		int idx_lb_st = it_lb_st->second;
-		cout << "lower bound of start: " << range_start[idx_lb_st] << endl;
+		// cout << "lower bound of start: " << range_start[idx_lb_st] << endl;
 		if (range_end[idx_lb_st] < start || range_start[idx_lb_st] > end) {
 			// does not intersect
-			cout << "does not intersect: " 
-				<< range_start[idx_lb_st] << " - " << range_end[idx_lb_st]
-				<< "| merge :" << SWALLOW
-				<< endl;
+			//cout << "does not intersect: " 
+			//	<< range_start[idx_lb_st] << " - " << range_end[idx_lb_st]
+			//	<< "| merge :" << SWALLOW
+			//	<< endl;
 		} else {
 			res[idx_lb_st] =  COALESCE;
-			cout << "INFO: " << fn
-				<< " case it_lb_st == range_start_index_map.begin(): " 
-				<< start << " - " << end 
-				<< " intersects with idx_lb_st: "
-				<< range_start[idx_lb_st]
-				<< " - " 
-				<< range_end[idx_lb_st]
-				<< "| merge :" << COALESCE
-				<< endl;
+			// cout << "INFO: " << fn
+			// 	<< " case it_lb_st == range_start_index_map.begin(): " 
+			// 	<< start << " - " << end 
+			// 	<< " intersects with idx_lb_st: "
+			// 	<< range_start[idx_lb_st]
+			// 	<< " - " 
+			// 	<< range_end[idx_lb_st]
+			// 	<< "| merge :" << COALESCE
+			// 	<< endl;
 		}
 	} 
 	//else {
 	//	--it_lb_st;
 	//}
 	else if (it_lb_st != range_start_index_map.end() ) {
-		cout << "INFO: " << fn
-			<< " case it_lb_st != range_start_index_map.end(): " 
-			<< endl;
+		//cout << "INFO: " << fn
+		//	<< " case it_lb_st != range_start_index_map.end(): " 
+		//	<< endl;
 		--it_lb_st;
 		int idx_lb_st = it_lb_st->second;
-		cout << "lower bound of start: " << range_start[idx_lb_st] << endl;
+		//cout << "lower bound of start: " << range_start[idx_lb_st] << endl;
 		if (range_end[idx_lb_st] < start) {
 			// does not intersect
-			cout << "does not intersect: " 
-				<< range_start[idx_lb_st] << " - " << range_end[idx_lb_st]
-				<< "| merge :" << SWALLOW
-				<< endl;
+			// cout << "does not intersect: " 
+			// 	<< range_start[idx_lb_st] << " - " << range_end[idx_lb_st]
+			// 	<< "| merge :" << SWALLOW
+			// 	<< endl;
 		} else {
 			res[idx_lb_st] =  COALESCE;
-			cout << start << " - " << end 
-				<< " intersects with idx_lb_st: "
-				<< range_start[idx_lb_st]
-				<< " - " 
-				<< range_end[idx_lb_st]
-				<< "| merge :" << COALESCE
-				<< endl;
+			// cout << start << " - " << end 
+			// 	<< " intersects with idx_lb_st: "
+			// 	<< range_start[idx_lb_st]
+			// 	<< " - " 
+			// 	<< range_end[idx_lb_st]
+			// 	<< "| merge :" << COALESCE
+			// 	<< endl;
 		}
 	} else /* (it_lb_st == range_start_index_map.end() ) */ {
 		if (range_start_index_map.size() == 1) {
@@ -106,35 +106,35 @@ map<int, IntervalMergeStrategy> disjoint_interval_range::intersects(int start, i
 		cout << "lower bound of start: " << range_start[idx_lb_st] << endl;
 		if (range_end[idx_lb_st] < start || range_start[idx_lb_st] > end) {
 			// does not intersect
-			cout << "does not intersect: " 
-				<< range_start[idx_lb_st] << " - " << range_end[idx_lb_st]
-				<< "| merge :" << SWALLOW
-				<< endl;
+			// cout << "does not intersect: " 
+			// 	<< range_start[idx_lb_st] << " - " << range_end[idx_lb_st]
+			// 	<< "| merge :" << SWALLOW
+			// 	<< endl;
 		} else {
 			res[idx_lb_st] =  COALESCE;
-			cout << "INFO: " << fn
-				<< " case it_lb_st == range_start_index_map.begin(): " 
-				<< start << " - " << end 
-				<< " intersects with idx_lb_st: "
-				<< range_start[idx_lb_st]
-				<< " - " 
-				<< range_end[idx_lb_st]
-				<< "| merge :" << COALESCE
-				<< endl;
+			// cout << "INFO: " << fn
+			// 	<< " case it_lb_st == range_start_index_map.begin(): " 
+			// 	<< start << " - " << end 
+			// 	<< " intersects with idx_lb_st: "
+			// 	<< range_start[idx_lb_st]
+			// 	<< " - " 
+			// 	<< range_end[idx_lb_st]
+			// 	<< "| merge :" << COALESCE
+			// 	<< endl;
 		}
 	}
 	map<int, int>::iterator it_ub_st = range_start_index_map.upper_bound(start);
 	if (it_ub_st != range_start_index_map.end()) {
 		int idx_ub_st = it_ub_st->second;
-		cout << "upper_bound bound of start: " << range_start[idx_ub_st] << endl;
+		// cout << "upper_bound bound of start: " << range_start[idx_ub_st] << endl;
 	}
 
 
-	cout << "matching ranges in between : "; 
+	// cout << "matching ranges in between : "; 
 	for (map<int, int>::iterator it = range_start_index_map.lower_bound(start);
 		it != range_start_index_map.lower_bound(end); ++it) {
 		int idx_rng = it->second;
-		cout << ", " << range_start[idx_rng] << " - " << range_end[idx_rng];
+		// cout << ", " << range_start[idx_rng] << " - " << range_end[idx_rng];
 			//<< endl;
 		//res.push_back(idx_rng);
 		if ( (range_start[idx_rng] <= start && range_end[idx_rng] <= end)  ||
@@ -159,13 +159,13 @@ map<int, IntervalMergeStrategy> disjoint_interval_range::intersects(int start, i
 			// does not intersect
 		} else {
 			res[idx_ub_end] = COALESCE;
-			cout << start << " - " << end 
-				<< " intersects with idx_ub_end: " << idx_ub_end
-				<< " :  " 
-				<< range_start[idx_ub_end]
-				<< " - " 
-				<< range_end[idx_ub_end]
-				<< endl;
+			// cout << start << " - " << end 
+			// 	<< " intersects with idx_ub_end: " << idx_ub_end
+			// 	<< " :  " 
+			// 	<< range_start[idx_ub_end]
+			// 	<< " - " 
+			// 	<< range_end[idx_ub_end]
+			// 	<< endl;
 		}
 	}
 
@@ -174,9 +174,9 @@ map<int, IntervalMergeStrategy> disjoint_interval_range::intersects(int start, i
 	//for (map<int, int > :: iterator it1 = it_ub_st; it1 != it_lb_end; ++it1) {
 	//	cout << it1->first;
 	//}
-	cout << "EXIT " << fn << " start: " << start << ", end: " << end 
-		<< ", res.size(): " << res.size()
-		<< endl;
+	//cout << "EXIT " << fn << " start: " << start << ", end: " << end 
+	//	<< ", res.size(): " << res.size()
+	//	<< endl;
 	return res;
 }
 
@@ -185,7 +185,7 @@ string disjoint_interval_range::print()
 	stringstream s;
 	for (map<int, int> :: iterator it = range_start_index_map.begin();
 			it != range_start_index_map.end(); ++it) {
-		cout << "index for range start: " << it->first << endl;
+		//cout << "index for range start: " << it->first << endl;
 		int i = it -> second;
 		s << ", " << range_start[i] << " - " << range_end[i];
 	}
@@ -195,50 +195,50 @@ string disjoint_interval_range::print()
 void disjoint_interval_range::add_to_range(int start, int end)
 {
 	string fn (__PRETTY_FUNCTION__);
-	cout << "ENTER " << fn << " start: " << start << ", end: " << end << endl;
+	// cout << "ENTER " << fn << " start: " << start << ", end: " << end << endl;
 	if (range_start.size() == 0) {
-		cout << "INFO : " <<  fn << " case 1 - if range_start.size() == 0" << endl;
+		// cout << "INFO : " <<  fn << " case 1 - if range_start.size() == 0" << endl;
 		range_start.push_back(start);
 		range_end.push_back(end);
 		range_start_index_map[start] = range_start.size()-1;
 		range_end_index_map[end] = range_end.size()-1;
 	} else {
-		cout << "INFO : " <<  fn << " case 2  - else : range_start.size() != 0" << endl;
+		// cout << "INFO : " <<  fn << " case 2  - else : range_start.size() != 0" << endl;
 		// for now - just add until we fix the intersection logic 
 		map<int, IntervalMergeStrategy> res = intersects(start, end);
 		if (res.size() == 0) {
-			cout << "INFO " << " case 2 a - intersects => res.size() == 0" << endl;
+			// cout << "INFO " << " case 2 a - intersects => res.size() == 0" << endl;
 			range_start.push_back(start);
 			range_end.push_back(end);
 			range_start_index_map[start] = range_start.size()-1;
 			range_end_index_map[end] = range_end.size()-1;
 		} else {
-			cout << "INFO " << fn << " case 2 b - intersects => res.size() == 0" << endl;
-			cout << "INFO " << fn << "n intersecting ranges: " << res.size() << endl;
+			// cout << "INFO " << fn << " case 2 b - intersects => res.size() == 0" << endl;
+			// cout << "INFO " << fn << "n intersecting ranges: " << res.size() << endl;
 			int n_coalesce = 0;
 			vector<pair<int, IntervalMergeStrategy>*> indexes;
 			int new_start = start, new_end = end;
-			cout << "INFO " << fn << "new_start: " << new_start << ", new_end: " << new_end << endl;
-			cout << "INFO " <<"the ranges are: " ;
+			// cout << "INFO " << fn << "new_start: " << new_start << ", new_end: " << new_end << endl;
+			// cout << "INFO " <<"the ranges are: " ;
 			for (map<int, IntervalMergeStrategy>::iterator it = 
 					res.begin(); it != res.end(); ++it) {
-				cout << ", " << range_start[it->first] << " - " << range_end[it->first] 
-					<< "| merge strategy : " << it->second;
+				// cout << ", " << range_start[it->first] << " - " << range_end[it->first] 
+				// 	<< "| merge strategy : " << it->second;
 				indexes.push_back(new pair<int, IntervalMergeStrategy>(it->first,it->second));
 				if (it->second == COALESCE) {
 					cout << 
 					++n_coalesce;
 					if (range_start[it->first] < new_start) {
 						new_start = range_start[it->first];
-						cout << "updated new_start: " << new_start << endl;
+						// cout << "updated new_start: " << new_start << endl;
 					}
 					if (range_end[it->first] > new_end) {
 						new_end = range_end[it->first];
-						cout << "updated new_end: " << new_end << endl;
+						// cout << "updated new_end: " << new_end << endl;
 					}
 				}
 			}
-			cout << "new_start: " << new_start << ", new_end: " << new_end << endl;
+			// cout << "new_start: " << new_start << ", new_end: " << new_end << endl;
 			cout << endl;
 			if (n_coalesce > 2) {
 				cerr << "dying as this should never happen" << endl;
@@ -246,59 +246,59 @@ void disjoint_interval_range::add_to_range(int start, int end)
 			}
 			
 			// delete the rest
-			cout   << "Before deletion: "
-				<< "range_start.size(): " << range_start.size()
-				<< ", range_end.size(): " << range_end.size()
-				<< ", range_start_index_map.size(): " << range_start_index_map.size()
-				<< ", range_end_index_map.size(): " << range_end_index_map.size()
-				<< endl;
+			// cout   << "Before deletion: "
+			// 	<< "range_start.size(): " << range_start.size()
+			// 	<< ", range_end.size(): " << range_end.size()
+			// 	<< ", range_start_index_map.size(): " << range_start_index_map.size()
+			// 	<< ", range_end_index_map.size(): " << range_end_index_map.size()
+			// 	<< endl;
 			for (int i = indexes.size() - 1; i >= 1; i--) {
 				// erase the other ranges
 				int idx = indexes[i]->first;
 				int prev_start = range_start[idx];
 				int prev_end = range_end[idx];
-				cout << "erasing vec index : " << idx 
-					<< ", prev_start: " << prev_start
-					<< ", prev_end: " << prev_end
-					<< endl;
+				// cout << "erasing vec index : " << idx 
+				// 	<< ", prev_start: " << prev_start
+				// 	<< ", prev_end: " << prev_end
+				// 	<< endl;
 				range_start_index_map.erase(prev_start);
 				range_end_index_map.erase(prev_end);
 				range_start.erase(range_start.begin()+idx);
 				range_end.erase(range_end.begin()+idx);
-				cout   << "After deletion: "
-					<< "range_start.size(): " << range_start.size()
-					<< ", range_end.size(): " << range_end.size()
-					<< ", range_start_index_map.size(): " << range_start_index_map.size()
-					<< ", range_end_index_map.size(): " << range_end_index_map.size()
-					<< endl;
+				// cout   << "After deletion: "
+				// 	<< "range_start.size(): " << range_start.size()
+				// 	<< ", range_end.size(): " << range_end.size()
+				// 	<< ", range_start_index_map.size(): " << range_start_index_map.size()
+				// 	<< ", range_end_index_map.size(): " << range_end_index_map.size()
+				// 	<< endl;
 			}
-			cout << "range_start.size(): " << range_start.size()
-				<< "range_end.size(): " << range_end.size()
-				<< endl;
+			// cout << "range_start.size(): " << range_start.size()
+			// 	<< "range_end.size(): " << range_end.size()
+			// 	<< endl;
 			pair<int, IntervalMergeStrategy> & i1 = * indexes[0];
 			// keep the lowest index 
 			{
 				int idx = indexes[0]->first;
-				cout << "keeping range at index: " << idx 
-					<< "new_start: " << new_start
-					<< "new_end: " << new_end
-					<< endl;
+				// cout << "keeping range at index: " << idx 
+				// 	<< "new_start: " << new_start
+				// 	<< "new_end: " << new_end
+				// 	<< endl;
 				int prev_start = range_start[idx];
 				int prev_end = range_end[idx];
 				range_start[idx] = new_start;
 				range_end[idx] = new_end;
 				range_start_index_map.erase(prev_start);
 				range_end_index_map.erase(prev_end);
-				cout << "range_start_index_map.size(): " << range_start_index_map.size() 
-					<< endl;
-				cout << "range_end_index_map.size(): " << range_end_index_map.size() 
-					<< endl;
+				// cout << "range_start_index_map.size(): " << range_start_index_map.size() 
+				// 	<< endl;
+				// cout << "range_end_index_map.size(): " << range_end_index_map.size() 
+				// 	<< endl;
 				range_start_index_map[new_start]= idx;
 				range_end_index_map[new_end] = idx;
-				cout << "after new_start range_start_index_map.size(): " << range_start_index_map.size() 
-					<< endl;
-				cout << "after new_end range_end_index_map.size(): " << range_end_index_map.size() 
-					<< endl;
+				// cout << "after new_start range_start_index_map.size(): " << range_start_index_map.size() 
+				// 	<< endl;
+				// cout << "after new_end range_end_index_map.size(): " << range_end_index_map.size() 
+				// 	<< endl;
 			}
 
 			if (n_coalesce > 2) {
