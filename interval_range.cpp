@@ -103,7 +103,7 @@ map<int, IntervalMergeStrategy> disjoint_interval_range::intersects(int start, i
 			it_lb_st = std::prev(range_start_index_map.end());
 		}
 		int idx_lb_st = it_lb_st->second;
-		cout << "lower bound of start: " << range_start[idx_lb_st] << endl;
+		// cout << "lower bound of start: " << range_start[idx_lb_st] << endl;
 		if (range_end[idx_lb_st] < start || range_start[idx_lb_st] > end) {
 			// does not intersect
 			// cout << "does not intersect: " 
@@ -145,7 +145,7 @@ map<int, IntervalMergeStrategy> disjoint_interval_range::intersects(int start, i
 			res[idx_rng] =  SWALLOW;
 		}
 	}
-	cout << endl;
+	//cout << endl;
 
 
 	map<int, int>::iterator it_lb_end = range_end_index_map.lower_bound(end);
@@ -177,6 +177,17 @@ map<int, IntervalMergeStrategy> disjoint_interval_range::intersects(int start, i
 	//cout << "EXIT " << fn << " start: " << start << ", end: " << end 
 	//	<< ", res.size(): " << res.size()
 	//	<< endl;
+	return res;
+}
+
+vector<pair<int,int>> disjoint_interval_range:: get_intervals()
+{
+	vector<pair<int,int>> res;
+	for (map<int, int> :: iterator it = range_start_index_map.begin();
+			it != range_start_index_map.end(); ++it) {
+		int i = it -> second;
+		res.push_back(pair<int, int>(range_start[i], range_end[i]));
+	}
 	return res;
 }
 
@@ -226,7 +237,7 @@ void disjoint_interval_range::add_to_range(int start, int end)
 				// 	<< "| merge strategy : " << it->second;
 				indexes.push_back(new pair<int, IntervalMergeStrategy>(it->first,it->second));
 				if (it->second == COALESCE) {
-					cout << 
+					// cout << 
 					++n_coalesce;
 					if (range_start[it->first] < new_start) {
 						new_start = range_start[it->first];
@@ -239,7 +250,7 @@ void disjoint_interval_range::add_to_range(int start, int end)
 				}
 			}
 			// cout << "new_start: " << new_start << ", new_end: " << new_end << endl;
-			cout << endl;
+			//cout << endl;
 			if (n_coalesce > 2) {
 				cerr << "dying as this should never happen" << endl;
 				exit(1); // die

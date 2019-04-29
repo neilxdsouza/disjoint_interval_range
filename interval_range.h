@@ -22,6 +22,7 @@ struct disjoint_interval_range {
 	void add_to_range(int start, int end);
 	std::map<int, IntervalMergeStrategy> intersects(int start, int end);
 	std::string print();
+	std::vector<std::pair<int,int>> get_intervals();
 };
 
 #endif /* disjoint_interval_range_h */
