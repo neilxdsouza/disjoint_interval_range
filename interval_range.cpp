@@ -237,10 +237,12 @@ void disjoint_interval_range::add_to_range(int start, int end)
 		map<int, IntervalMergeStrategy> res = intersects(start, end);
 		if (res.size() == 0) {
 			cout << "INFO " << " case 2 a - intersects => res.size() == 0" << endl;
-			range_index_to_start[range_index_to_start.size()] = start;
-			range_index_to_end[range_index_to_end.size()] = end;
-			range_start_index_map[start] = range_index_to_start.size()-1;
-			range_end_index_map[end] = range_index_to_end.size()-1;
+			map<int, int>::reverse_iterator it_r = range_index_to_start.rbegin();
+			int index = it_r->first+1;
+			range_index_to_start[index] = start;
+			range_index_to_end[index] = end;
+			range_start_index_map[start] = index;
+			range_end_index_map[end] = index;
 		} else {
 			cout << "INFO " << fn << " case 2 b - intersects => res.size() != 0, it is: "
 				<< res.size() << endl;
@@ -441,7 +443,6 @@ int main()
 	int n_tests = 0, n_passed = 0;
 	map<string, bool> test_results;
 
-	/*
 	{
 		string tname("only 1 interval");
 		struct disjoint_interval_range dir1;
@@ -799,7 +800,6 @@ int main()
 		}
 	}
 
-	*/
 
 	{
 
