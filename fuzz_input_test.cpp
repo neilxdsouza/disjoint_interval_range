@@ -30,13 +30,15 @@ int main()
 		cin >> seed;
 		struct disjoint_interval_range dir1;
 		vector <pair<int, int> > v_p;
+		cout << "test: " << j+1 <<  "seed : " << seed << endl;
 		for (int i = 0; i < 1000; ++i) {
 			int i_s, i_e;
 			cin >> i_s >> i_e;
 			v_p.push_back(pair<int, int>(i_s, i_e));
 			dir1.add_to_range(i_s, i_e);
+
+			cout << "after adding " << i_s << " - " << i_e << " : "  << dir1.print() << endl;
 		}
-		cout << "seed : " << seed << endl;
 		for (int i = 0; i < v_p.size(); ++i) {
 			cout << " " << v_p[i].first << " - " <<
 				v_p[i].second ;
